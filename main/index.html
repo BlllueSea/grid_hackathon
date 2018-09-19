@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>nutrient　app</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+        <script src="./js/main.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/main.css">
+        <title>app</title>
+    </head>
+    <body>
+      <h1>Nutrient_APP</h1>
+    　<div class="bigcontainer">
+          <div class="container">
+
+              <form action="" name="thisForm" method="post" enctype="multipart/form-data">
+                <h2>~Choose your gender~</h2>
+                  <input type="radio" name="gender" value=0 checked>male
+                  <input type="radio" name="gender" value=1>female
+                  <br>
+                  <hr>
+                  <br>
+                  <h2>~Drop your pictures~</h2>
+                  <div id="dragandrophandler">
+                      <div class="drag-drop-inside">
+                        <p class="drag-drop-info">Drop</p>
+                      </div>
+                  </div>
+                  <table class="showFileName"></table>
+                  <div class=sample_pic></div>
+                  <input type="button" value="SUBMIT" id="submitBtn">
+              </form>
+          </div>
+          <br>
+          <hr>
+          <h2>Result</h2>
+          <h3>you are eating <span id="food"></span></h3>
+
+
+          <div class="result">
+              <div class="boxCont" id="radar_chart">
+                         <div class="chart_1"　style="position: relative; width: 100px;">
+                            <canvas id="myChart_1"></canvas>
+                         </div>
+                         <div class="chart_2"　style="position: relative; width: 100px;">
+                             <canvas id="myChart_2"></canvas>
+                         </div>
+              </div>
+
+              <div class="boxCont" id="recommend_menu">
+
+              </div>
+              <div class="boxCont" id="recommend_photo">
+
+              </div>
+              <div class="boxCont">
+                      <table  id="real_value">
+                              <tr id="out1"></tr>
+                              <tr id="out2"></tr>
+                              <tr id="out3"></tr>
+                              <tr id="out4"></tr>
+                              <tr id="out5"></tr>
+                              <tr id="out6"></tr>
+                              <tr id="out7"></tr>
+                              <tr id="out8"></tr>
+                              <tr id="out9"></tr>
+                              <tr id="out10"></tr>
+                              <tr id="out11"></tr>
+                              <tr id="out12"></tr>
+                              <tr id="out13"></tr>
+                              <tr id="out14"></tr>
+                              <tr id="out15"></tr>
+                              <tr id="out16"></tr>
+                              <tr id="out17"></tr>
+                              <tr id="out18"></tr>
+                              <tr id="out19"></tr>
+                              <tr id="out20"></tr>
+                              <tr id="out21"></tr>
+                      </table>
+              </div>
+
+          </div>
+
+     </div>
+
+    </body>
+</html>
