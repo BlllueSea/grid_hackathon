@@ -74,27 +74,33 @@
    // Read the file contents using HTML5 FormData() when the files are dropped.
          function showFileContents(files,obj)
          {
-            var s;
+            var s='';
 
             for (var i = 0; i < files.length; i++){
-                 var fd = new FormData();
-                 fd.append('file', files[i]);
-                 s += '<tr><td>ファイル名</td><td>' + files[i].name + '</td></tr>';
-                 sendFileToServer(fd)
+                 var formData = new FormData();
+                 formData.append('file', files[i]);
+                 s += '<div>file name : ' + files[i].name + '</div>';
+                 sendFileToServer(formData);
             }
 //            console.log(fd.length)
 
-           $('.showFileName').append(s);
+           $('#showFileName').html(s);
          }
 
+
+         function getSexForFormData(formData){
+            var sex = document.querySelector('input[name="sex"]:checked').value;
+            // check sex-> alert(sex+ ' was selected!');
+            formData.append('sex',sex);
+            return formData;
+      }
 
          //送信
          function sendFileToServer(formData){
            $('#submitBtn').on('click', function(e){ //送信ボタンが押されたら
                  e.preventDefault();
-                 var gender = $('#thisForm [name=gender]').val()
-                 console.log(gender)
-//                       console.log(formData);
+                 formData = getSexForFormData(formData);
+                 console.log(formData);
 
                  // サーバーに送る　→　サーバーからの出力表示
 //                 var path = 'http://localhost:8080/upload/' + fName;
@@ -168,24 +174,24 @@
                            }]
                          },
                          options:{
-                           responsive: true,
+                           responsive: false,
                            legend: {
                              display: false
                            },
                            title: {                         //タイトル設定
                              display: true,                 //表示設定
-                             fontSize: 30,                  //フォントサイズ
+                             fontSize: 15,                  //フォントサイズ
                              text: 'ALL NUTRITION'                //ラベル
                            },
                            scales:{
                              yAxes:[{
                                display: true,                //表示設定
-                               barPercentage: 1.0,           //棒グラフ幅
-                               categoryPercentage: 1.0,      //棒グラフ幅
+                               barPercentage: 0.7,           //棒グラフ幅
+                               categoryPercentage: 0.5,      //棒グラフ幅
                                scaleLabel: {                 //軸ラベル設定
                                  display:false,             //表示設定
                                  labelString: '',  //ラベル
-                                 fontSize: 18
+                                 fontSize: 11
                                }              //フォントサイズ
                              }],
                              xAxes: [{
@@ -193,8 +199,8 @@
                                ticks: { //軸設定
                                  min: 0,
                                  max: 120,
-                                 fontSize: 20,
-                                 stepSize:5
+                                 fontSize: 11,
+                                 stepSize: 5
                                }
                              }]
                             }
@@ -209,31 +215,30 @@
                               label: 'Main Nutrition',
                               borderColor: "#ccffcc",
                               borderColor: "#00FF00",
-                              data: [percent.protains, percent.sodium_chloride_equivalent, percent.calories, percent.fat, percent.carbohydrate, percent.iron, percent.vitamin_C]
+                              data: [percent.proteins, percent.sodium_chloride_equivalent, percent.calories, percent.fat, percent.carbohydrate, percent.iron, percent.vitamin_C]
                             },{
                               label: 'Reference Value',
                               borderColor: "#C0C0C0",
                               data: [100, 100, 100, 100, 100, 100, 100]
-                            }]
-                         },
+                            }],
                          options:{
-                           responsive: true,
+                           responsive: false,
                            legend: {
                              display: true
                            },
                            title: {
                              display: true,
-                             fontSize: 30,
+                             fontSize: 15,
                              text: 'MAIN NUTRITION'
                            },
                            scale: {
                              display: true,
                              pointLabels: {
-                              fontSize: 15,
-                            },
-                            ticks: {
+                              fontSize: 11,
+                             },
+                             ticks: {
                               display: true,
-                              fontSize: 12,
+                              fontSize: 9,
                               fontColor: "#000000",
                                 min: 0,
                                 max: 120,
@@ -241,38 +246,39 @@
                             }
                            }
                           }
+                       }
                      });
 
 
+                     $("#result").append()
+                     $("#food").html( "<b>"+ res.food_name +"</b>, aren't you?");
 
-                     $("#food").html( "<font size='5' color='mediumseagreen'><b>"+ res.food_name +"</b></font>, aren't you?");
-
-                   	 $("#out1").html('<td>calories：</td><td>'+ real_value.calories +' kcal</td>');
-                   	 $("#out2").html('<td>carbohydrate：</td><td>'+ real_value.carbohydrate +' g</td>');
-                   	 $("#out3").html('<td>proteins：</td><td>'+ real_value.proteins +' g</td>');
-                   	 $("#out4").html('<td>fat :</td><td>'+ real_value.fat +' g</td>');
-                     $("#out5").html('<td>dietary_fiber :</td><td>'+ real_value.dietary_fiber +' g</td>');
-                     $("#out6").html('<td>sodium :</td><td>'+ real_value.sodium +' mg</td>');
-                     $("#out7").html('<td>sodium_chloride_equivalent :</td><td>'+ real_value.sodium_chloride_equivalent +' g</td>');
-                     $("#out8").html('<td>potassium :</td><td>'+ real_value.potassium +' mg</td>');
-                     $("#out9").html('<td>calcium :</td><td>'+ real_value.calcium +' mg</td>');
-                     $("#out10").html('<td>iron :</td><td>'+ real_value.iron +' mg</td>');
-                     $("#out11").html('<td>magnesium :</td><td>'+ real_value.magnesium +' mg</td>');
-                     $("#out12").html('<td>phosphorus :</td><td>'+ real_value.phosphorus +' mg</td>');
-                     $("#out13").html('<td>vitamin_A :</td><td>'+ real_value.vitamin_A +' μg</td>');
-                     $("#out14").html('<td>vitamin_B1 :</td><td>'+ real_value.vitamin_B1 +' mg</td>');
-                     $("#out15").html('<td>vitamin_B2 :</td><td>'+ real_value.vitamin_B2 +' mg</td>');
-                     $("#out16").html('<td>vitamin_B6 :</td><td>'+ real_value.vitamin_B6 +' mg</td>');
-                     $("#out17").html('<td>vitamin_B12 :</td><td>'+ real_value.vitamin_B12 +' μg</td>');
-                     $("#out18").html('<td>niacin :</td><td>'+ real_value.niacin +' mg</td>');
-                     $("#out19").html('<td>vitamin_C :</td><td>'+ real_value.vitamin_C +' mg</td>');
-                     $("#out20").html('<td>vitamin_D :</td><td>'+ real_value.vitamin_D +' μg</td>');
-                     $("#out21").html('<td>vitamin_E :</td><td>'+ real_value.vitamin_E +' mg</td>');
+                   	 $("#out1").html('<div class="siimple-table-cell">calories </div><div class="siimple-table-cell">'+ real_value.calories +' kcal</div>');
+                   	 $("#out2").html('<div class="siimple-table-cell">carbohydrate </div><div class="siimple-table-cell">'+ real_value.carbohydrate +' g</div>');
+                   	 $("#out3").html('<div class="siimple-table-cell">proteins </div><div class="siimple-table-cell">'+ real_value.proteins +' g</div>');
+                   	 $("#out4").html('<div class="siimple-table-cell">fat </div><div class="siimple-table-cell">'+ real_value.fat +' g</div>');
+                     $("#out5").html('<div class="siimple-table-cell">dietary_fiber </div><div class="siimple-table-cell">'+ real_value.dietary_fiber +' g</div>');
+                     $("#out6").html('<div class="siimple-table-cell">sodium </div><div class="siimple-table-cell">'+ real_value.sodium +' mg</div>');
+                     $("#out7").html('<div class="siimple-table-cell">sodium_chloride_equivalent </div><div class="siimple-table-cell">'+ real_value.sodium_chloride_equivalent +' g</div>');
+                     $("#out8").html('<div class="siimple-table-cell">potassium </div><div class="siimple-table-cell">'+ real_value.potassium +' mg</div>');
+                     $("#out9").html('<div class="siimple-table-cell">calcium </div><div class="siimple-table-cell">'+ real_value.calcium +' mg</div>');
+                     $("#out10").html('<div class="siimple-table-cell">iron </div><div class="siimple-table-cell">'+ real_value.iron +' mg</div>');
+                     $("#out11").html('<div class="siimple-table-cell">magnesium </div><div class="siimple-table-cell">'+ real_value.magnesium +' mg</div>');
+                     $("#out12").html('<div class="siimple-table-cell">phosphorus </div><div class="siimple-table-cell">'+ real_value.phosphorus +' mg</div>');
+                     $("#out13").html('<div class="siimple-table-cell">vitamin_A </div><div class="siimple-table-cell">'+ real_value.vitamin_A +' μg</div>');
+                     $("#out14").html('<div class="siimple-table-cell">vitamin_B1 </div><div class="siimple-table-cell">'+ real_value.vitamin_B1 +' mg</div>');
+                     $("#out15").html('<div class="siimple-table-cell">vitamin_B2 </div><div class="siimple-table-cell">'+ real_value.vitamin_B2 +' mg</div>');
+                     $("#out16").html('<div class="siimple-table-cell">vitamin_B6 </div><div class="siimple-table-cell">'+ real_value.vitamin_B6 +' mg</div>');
+                     $("#out17").html('<div class="siimple-table-cell">vitamin_B12 </div><div class="siimple-table-cell">'+ real_value.vitamin_B12 +' μg</div>');
+                     $("#out18").html('<div class="siimple-table-cell">niacin </div><div class="siimple-table-cell">'+ real_value.niacin +' mg</div>');
+                     $("#out19").html('<div class="siimple-table-cell">vitamin_C </div><div class="siimple-table-cell">'+ real_value.vitamin_C +' mg</div>');
+                     $("#out20").html('<div class="siimple-table-cell">vitamin_D </div><div class="siimple-table-cell">'+ real_value.vitamin_D +' μg</div>');
+                     $("#out21").html('<div class="siimple-table-cell">vitamin_E </div><div class="siimple-table-cell">'+ real_value.vitamin_E +' mg</div>');
 
                      $("#radar_chart").append('<img src='+res.radar_chart_path+' alt="radar chart">');
 
-                     $("#recommend_menu").append("I recommend you to eat   <font size='5' color='mediumseagreen'><b>"+res.recommend_menu+"</b></font>");
-                     $("#recommend_photo").append('<img src='+res.recommend_imd_path+' alt="recommend">');
+                     $("#recommend_menu").append("<b>"+res.recommend_menu+"</b>");
+                     $("#recommend_img").append('<div class="card-body-content"><img src='+res.recommend_img_path+' alt="recommend"></div>');
 
 
                  }).fail(function(data) {
@@ -281,4 +287,3 @@
                });
          }
      });
-

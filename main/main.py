@@ -53,9 +53,9 @@ def read_tmp(filename):
 @route('/upload', method='POST')
 def upload():
     image = request.files.get('file')
-    # gender = request.get("gender")
+    sex = int(request.forms.get("sex"))
     print(image.filename)
-    # print(gender)
+    print("sex",sex)
     name, _ = os.path.splitext(image.filename)
 
     if _ not in ('.png', '.jpg', '.jpeg'):
@@ -69,16 +69,11 @@ def upload():
     image.save(upload_path, overwrite=True)
     print(upload_path)
 
-
+# get prediction
     predict_value = convert_img.predict_from_2img(upload_path, model)
-
-    # predict_value = 4
-    sex = 0
 
 # get food-name and persentage
     food_name, per_dict, real_value_list = analysis_per.compare_nutrition(predict_value, sex)
-
-
     recommend_img, recommend_menu = recommend.recommend(per_dict)
 
 # prepare data to send
@@ -86,7 +81,7 @@ def upload():
         "food_name": food_name,
         "per_dict": per_dict,
         "real_value": real_value_list,
-        "recommend_imd_path": "/static/" + recommend_img,
+        "recommend_img_path": "/static/" + recommend_img,
         "recommend_menu": recommend_menu
     }
     print(main_dict)
@@ -104,4 +99,4 @@ def read_img(filename):
 
 
 
-run(host="0.0.0.0", port=int(os.environ.get("PORT", 9000)))
+run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))

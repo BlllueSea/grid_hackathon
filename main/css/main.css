@@ -1,14 +1,9 @@
-      　body{
+        html{
+          width: 100%;
         }
-        h1{
-          background-color: mediumseagreen;
+        body{
+          width: 100%;
         }
-        .bigcontainer{
-          width: 600px;
-          margin: auto;
-          /* text-align:center; */
-        }
-
         form{
           /* padding-top: 40px; */
           padding: 0;
@@ -21,13 +16,25 @@
           border: 1px dashed #aaa;
           border-radius: 10px;
           width:400px;
+          height: 150px;
           color:#92AAB0;
-          text-align:center;
-          vertical-align:middle;
           padding:0px;
           margin: 10px auto;
           font-size:200%;
-
+        }
+        .drag-drop-inside {/*親要素*/
+          position: relative;
+          height: 200px;
+        }
+        .drag-drop-info{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%,-50%);
+          -webkit-transform : translate(-50%,-50%);
+          transform : translate(-50%,-50%);
+          width: 100px;
+          text-align: center;/*一応BOX内の文字も中央寄せ*/
         }
         input[type=""]{
           width: 300px;
@@ -37,49 +44,48 @@
           text-align: center;
 
         }
+        #showFileName{
+          margin: 10px auto;
+        }
         #submitBtn{
           margin: 0px;
         }
         .showFileName{
           margin: 0px auto;
         }
-
-        #real_value{
+        /* #real_value{
           margin: 0px;
-        }
+        } */
 
-        #real_value th, td{
+        /* #real_value th, td{
           margin: 0px auto;
           font-size: 15px;
+        } */
+
+
+        /* .chart-container{
+          margin: 0px 0px 50px;
+        } */
+        #result{
+          margin: 0px auto;
+
+        }
+        .result_content{
+          margin-left: 70px;
+
         }
 
-/*float setting*/
-        .box .radar_chart{
-            float: left;
-            margin 20px 0px;
+        .card-body-content{
+          margin: 20px 0px;
         }
 
-        .boxCont {
-            overflow: hidden;
+        #recommend_img{
+          margin: 0px auto;
+          text-align:center;
         }
-
-        /* clearfix */
-        .boxCont:before,
-        .boxCont:after {
-            content: "";
-            display: table;
-        }
-
-        .boxCont:after {
-            clear: both;
-        }
-
-
         #recommend_menu{
           margin: 5px auto:
         }
-
-
 
         img[src=undefined]{
           display: none;

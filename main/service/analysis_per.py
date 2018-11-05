@@ -248,13 +248,14 @@ def compare_nutrition(predict_value, sex):
     real_value_list.append(vitamin_D)
     real_value_list.append(vitamin_E)
 
-
-    for i in range(len(per_list)):
+    l = len(per_list)
+    for i in range(l):
         if per_list[i] > 120:
             per_list[i] == 120
         else:
             pass
 
+# percentage
     per_dict = {
         "calories": per_list[0],
         "carbohydrate": per_list[1],
@@ -279,7 +280,7 @@ def compare_nutrition(predict_value, sex):
         "vitamin_E": per_list[20]
     }
 
-
+# the values contained in the food
     real_value_dict = {
         "calories": real_value_list[0],
         "carbohydrate": real_value_list[1],
