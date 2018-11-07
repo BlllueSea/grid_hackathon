@@ -7,10 +7,10 @@ import os
 from bottle import route, run, static_file, HTTPResponse, request
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-from renom_img.api.classification.vgg import VGG16
+from renom_img.api.classification.vgg import VGG19
 
-model = VGG16()
-model.load("paramater/vgg16_18c_jp0_last.h")
+model = VGG19()
+model.load("paramater/food_vgg19_jp256split_retrain_1103_10.h")
 
 
 
@@ -70,7 +70,7 @@ def upload():
     print(upload_path)
 
 # get prediction
-    predict_value = convert_img.predict_from_2img(upload_path, model)
+    predict_value = convert_img.predict_from_2img(upload_path, model, px=256)
 
 # get food-name and persentage
     food_name, per_dict, real_value_list = analysis_per.compare_nutrition(predict_value, sex)
